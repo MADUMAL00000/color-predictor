@@ -55,7 +55,7 @@ class MultiOutputSeq2SeqLSTM(nn.Module):
         
         self.lstm = nn.LSTM(
             input_size=input_dim,
-            hidden_size=hidden_dim
+            hidden_size=hidden_dim,
             num_layers=num_layers,
             batch_first=True,
             dropout=0.15
