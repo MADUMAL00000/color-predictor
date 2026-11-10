@@ -104,12 +104,13 @@ class HighOrderMarkovChain:
 # ==========================================
 # 5. TRAINING PIPELINE & CONCEPT DRIFT ADAPTATION
 # ==========================================
-def prepare_training_ tensors(sequence, window_size=15, output_steps=9):
+def prepare_training_tensors(sequence, window_size=15, output_steps=9):
     X, y = [], []
     for i in range(len(sequence) - window_size - output_steps + 1):
-        X.append(one_hot_encode(sequence[i:i + window_size]))
-        y.append(sequence[i + window_size:i + window_size + output_steps])
-    return np.array(X, dtype=np.float32), np.array(y, dtype=np.int64)
+        X.append(sequence[i : i + window_size])
+        y.append(sequence[i + window_size : i + window_size + output_steps])
+    return torch.tensor(X, dtype=torch.long), torch.tensor(y, dtype=torch.long)
+
 
 @st.cache_resource
 def initialize_model():
